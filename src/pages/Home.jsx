@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { useHistory } from 'react-router-dom';
+import FormVal from '../components/FormVal';
 
 const Home = () => {
   const history = useHistory();
@@ -20,6 +21,7 @@ const Home = () => {
       </Jumbotron>
       <Container>
         <Form>
+          <FormVal />
           <Button onClick={onSubmit}>Goto Posts</Button>
         </Form>
       </Container>
