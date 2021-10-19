@@ -5,7 +5,7 @@ function Third({ formData, onChange, errors }) {
 
   return (
     <div>
-      <div>
+      <div className="form-row">
         <div>Country Code:</div>
 
         <select name="countryCode" value={countryCode} onChange={e => onChange(e)}>
@@ -17,7 +17,7 @@ function Third({ formData, onChange, errors }) {
         )}
       </div>
 
-      <div>
+      <div className="form-row">
         <div>Phone Number:</div>
         <input type="text" name="phoneNumber" value={phoneNumber} onChange={e => onChange(e)} />
         {errors && !errors.isValid && errors.errors.phoneNumber && (
@@ -25,7 +25,7 @@ function Third({ formData, onChange, errors }) {
         )}
       </div>
 
-      <div>
+      <div className="form-row">
         <div htmlFor="acceptTermsAndCondition">Accept Terms and Condition:</div>
         <input
           type="checkbox"

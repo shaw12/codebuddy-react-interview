@@ -21,8 +21,7 @@ const Home = () => {
       </Jumbotron>
       <Container>
         <Form>
-          <FormVal />
-          <Button onClick={onSubmit}>Goto Posts</Button>
+          <FormVal onSubmit={onSubmit} />
         </Form>
       </Container>
     </main>

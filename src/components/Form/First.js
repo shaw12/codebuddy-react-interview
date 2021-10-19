@@ -4,8 +4,8 @@ function First({ formData, onChange, errors }) {
   const { emailId, password } = formData;
 
   return (
-    <div className="first">
-      <div>
+    <div>
+      <div className="form-row">
         <div>Email ID</div>
         <input type="email" name="emailId" value={emailId} onChange={e => onChange(e)} />
         {errors && !errors.isValid && errors.errors.emailId && (
@@ -13,7 +13,7 @@ function First({ formData, onChange, errors }) {
         )}
       </div>
 
-      <div>
+      <div className="form-row">
         <div>Password</div>
         <input type="password" name="password" value={password} onChange={e => onChange(e)} />
         {errors && !errors.isValid && errors.errors.password && (

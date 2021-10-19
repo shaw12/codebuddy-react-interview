@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import './FormVal.css';
-
-import { Steps, Button, message } from 'antd';
+import { Steps, Button } from 'antd';
 import First from './Form/First';
 import Second from './Form/Second';
 import Third from './Form/Third';
 import formValidateF from '../Validate/formValidateF';
 import formValidateS from '../Validate/formValidationS';
+import formValidateT from '../Validate/formValidationT';
 
 const { Step } = Steps;
 
-function FormVal() {
+function FormVal({ onSubmit }) {
   const initialState = {
     emailId: '',
     password: '',
     firstName: '',
     lastName: '',
     address: '',
-    countryCode: '',
+    countryCode: '+91',
     phoneNumber: '',
     acceptTermsAndCondition: false,
   };
@@ -49,26 +49,49 @@ function FormVal() {
       setErrors(validate);
     }
 
-    // if (current === 2) {
-    //     validate = formValidateT({
-    //       countryCode: formData.countryCode,
-    //       address: formData.address,
-    //     });
-    //     setErrors(validate);
-    //   }
-
     goTo = validate && validate.isValid;
 
     if (goTo) setCurrent(current + 1);
   };
 
-  console.log(errors);
+  const submit = () => {
+    const validate = formValidateT({
+      countryCode: formData.countryCode,
+      phoneNumber: formData.phoneNumber,
+      acceptTermsAndCondition: formData.acceptTermsAndCondition,
+    });
+    setErrors(validate);
+
+    if (validate.isValid) {
+      const requestOptions = {
+        method: 'POST',
+        // headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: 'Success',
+          data: {
+            emailId: formData.emailId,
+            password: formData.password,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            address: formData.address,
+            countryCode: formData.countryCode,
+            phoneNumber: formData.phoneNumber,
+          },
+        }),
+      };
+      fetch('https://codebuddy.review/signup', requestOptions)
+        .then(response => response.json())
+        .then(data => console.log('Success', data));
+
+      onSubmit();
+    }
+  };
+
   const prev = () => {
     setCurrent(current - 1);
   };
 
   const handleChange = e => {
-    console.log(e);
     if (e.target.name === 'acceptTermsAndCondition') {
       setFormData({
         ...formData,
@@ -84,15 +107,15 @@ function FormVal() {
 
   const steps = [
     {
-      title: 'First',
+      title: '',
       content: <First formData={formData} onChange={e => handleChange(e)} errors={errors} />,
     },
     {
-      title: 'Second',
+      title: '',
       content: <Second formData={formData} onChange={e => handleChange(e)} errors={errors} />,
     },
     {
-      title: 'Last',
+      title: '',
       content: <Third formData={formData} onChange={e => handleChange(e)} errors={errors} />,
     },
   ];
@@ -112,8 +135,8 @@ function FormVal() {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Done
+          <Button type="primary" onClick={() => submit()}>
+            Goto Posts
           </Button>
         )}
         {current > 0 && (

@@ -1,6 +1,50 @@
 @import '~bootstrap/scss/bootstrap';
+@import 'antd/dist/antd.css';
 
 .error-text {
   color: red;
   font-size: 12px;
+}
+
+.form-row {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.form-row div {
+  padding-left: 20px;
+  text-align: left;
+}
+
+input,
+textarea {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 5px;
+  width: auto;
+}
+
+input:focus {
+  outline: none;
+}
+
+@media (min-width: 480px) {
+  .form-row div {
+    padding-left: 40px;
+    width: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row div {
+    margin-bottom: 10px;
+    padding-left: 0;
+  }
 }
